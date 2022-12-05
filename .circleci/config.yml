@@ -2,8 +2,6 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-resource_class: dchesterman/testclass
-
 orbs:
   gradle: circleci/gradle@3.0.0
 
@@ -28,11 +26,18 @@ jobs:
       - run:
           name: "Say goodbye"
           command: "echo Goodbye, World!"
-
+  build:
+    docker:
+      - image: cimg/base:current
+    resource_class: dchesterman/testclass
+    steps:
+      - run: echo "Hi I'm on a Container Runner!"
+      
 workflows:
   checkout-build-test:
     jobs:
       - gradle/test
+      - build
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
