@@ -31,7 +31,12 @@ jobs:
       - image: cimg/base:current
     resource_class: dchesterman/testclass
     steps:
-      - run: echo "Hi I'm on a Container Runner!"
+      - run: 
+          name: "Hi Container"
+          command: echo "Hi I'm on a Container Runner!"
+      - run:
+          name: "Sleep"
+          command: sleep 7200
       
 workflows:
   checkout-build-test:
